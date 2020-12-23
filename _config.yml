@@ -7,35 +7,33 @@
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
-title: Chirpy                          # the main title
+title: 희봉이의 개발새발                          # the main title
 
-tagline: A text-focused Jekyll theme.  # it will display as the sub-title
+tagline: 개발새발 쓰여진, 하지만 빠져드는 개발/게임 블로그  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, portfolio, sidebar,
-  bootstrap Jekyll theme with responsive web design
-  and focuses on text presentation.
+  마이크로 서비스, 라이브 스트리밍에 관심이 있습니다.
+  핵앤슬래시 RPG 장르를 좋아합니다.
+  학부생 시절 팀 유니브데빌즈 co-founder로 참여해 대학생 아웃소싱 플랫폼 '유니드림'의 웹 풀스택 개발을 담당하였습니다.
 
 # fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
-url: ''
+url: 'https://p-heebong.github.io'
 
-author: your_full_name                  # change to your full name
+author: 희봉이                  # change to your full name
 
 avatar: /assets/img/sample/avatar.jpg   # support internet resources
 
 github:
-  username: github_username             # change to your github username
+  username: p-heebong             # change to your github username
 
-twitter:
-  username: twitter_username            # change to your twitter username
 
 social:
-  name: your_full_name                  # it will shows as the copyright owner in Footer
-  email: example@doamin.com             # change to your email address
+  name: 희봉이                  # it will shows as the copyright owner in Footer
+  email: qkrgmlwls104@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username      # change to your twitter homepage
-    - https://github.com/username       # change to your github homepage
+    # - https://twitter.com/username      # change to your twitter homepage
+    - https://github.com/p-heebong       # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -49,7 +47,7 @@ google_site_verification: google_meta_tag_verification # change to your verifica
 baseurl: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Asia/Shanghai
+timezone: Asia/Seoul
 
 google_analytics:
   id: ''          # Fill with your Google Analytics ID
@@ -63,8 +61,8 @@ google_analytics:
     cache: false  # pv data local cache, good for the users from GFW area.
 
 disqus:
-  comments: false  # boolean type, the global switch for posts comments.
-  shortname: ''    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+  comments: true  # boolean type, the global switch for posts comments.
+  shortname: 'p-heebong-github-io'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 
 # Prefer color scheme setting.
