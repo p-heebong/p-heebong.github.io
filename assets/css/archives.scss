@@ -1,13 +1,12 @@
 ---
-# Style for Archives
-# v2.0
-# https://github.com/cotes2020/jekyll-theme-chirpy
-# © 2019 Cotes Chung
-# MIT License
 ---
-
-
-{% include_relative _addon/main.scss %}
+/*!
+  Style for Archives
+  v2.0
+  https://github.com/cotes2020/jekyll-theme-chirpy
+  © 2019 Cotes Chung
+  MIT License
+*/
 
 %date-timeline {
   content: "";
@@ -17,10 +16,6 @@
   float: left;
   position: relative;
   background-color: var(--timeline-color);
-}
-
-%date-font {
-  font-family: 'Roboto Condensed', sans-serif;
 }
 
 #archives {
@@ -33,7 +28,7 @@
       background-image: linear-gradient(
         to left, #fff, #fbfbfb, #fbfbfb, #fbfbfb, #fff);
     }
-    > div {
+    >div {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -42,7 +37,7 @@
 
   span.lead {
     font-size: 1.5rem;
-    @extend %date-font;
+    font-family: 'Oswald', sans-serif;
     position: relative;
     left: 8px;
 
@@ -80,7 +75,7 @@
     &.month {
       width: 1.4rem;
       text-align: center;
-      @extend %date-font;
+      font-family: 'Oswald', sans-serif;
       ~a::before {
         /* A dot for Month and Day */
         content: "";
@@ -101,7 +96,7 @@
     }
     &.day {
       font-size: 85%;
-      font-family: 'Lato', sans-serif;
+      font-family: sans-serif;
       text-align: center;
       margin-right: -2px;
       width: 1.2rem;
@@ -111,12 +106,12 @@
   } // #archives .date
 
   ul {
-    > li {
-      > div > a {
+    >li {
+      >div>a {
         /* post title in Archvies */
         margin-left: 2.5rem;
         position: relative;
-        top: 0.1rem;
+        top: .1rem;
       }
       &::after {
         @extend %date-timeline;
@@ -129,10 +124,10 @@
         top: -1.61rem;
       }
     }
-    &:not(:last-child) > li:last-child::after {
+    &:not(:last-child)>li:last-child::after {
       height: 3.4rem;
     }
-    &:last-child > li:last-child::after {
+    &:last-child>li:last-child::after {
       display: none;
     }
   } // #archives ul

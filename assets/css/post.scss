@@ -1,14 +1,13 @@
 ---
-# Post-specific style
-# v2.0
-# https://github.com/cotes2020/jekyll-theme-chirpy
-# © 2019 Cotes Chung
-# MIT License
 ---
-
-
-{% include_relative _addon/main.scss %}
-{% include_relative _addon/syntax.scss %}
+/*!
+  Post-specific style
+  v2.0
+  https://github.com/cotes2020/jekyll-theme-chirpy
+  © 2019 Cotes Chung
+  MIT License
+*/
+@import "_addon/variables";
 
 $prompt-older: "{{ site.data.label.post.button.previous }}";
 $prompt-newer: "{{ site.data.label.post.button.next }}";
@@ -27,63 +26,28 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   border-color: var(--btn-border-color);
 }
 
-@mixin dot($pl: 0.2rem, $pr: 0.4rem) {
-  content: "\2022";
-  color: rgba(158, 158, 158, 0.8);
-  padding-left: $pl;
-  padding-right: $pr;
-}
-
-.post .post-meta {
-  > div:nth-child(2) {
-    > span:not(:first-child)::before {
-      @include dot;
-    }
-  }
-  #pv::after {
-    content: " views";
-  }
-  .readtime::after {
-    content: " read";
-  }
-}
-
-.post-content {
-  > ol, > ul, > dl {
-    padding-left: 2rem;
-    li + li {
-      margin-top: 0.3rem;
-    }
-  }
-  li {
-    > ol, > ul, > dl { // sub list
-      padding-left: 2rem;
-      margin-top: 0.3rem;
-    }
-    > p {
-      margin: 1rem 0 0.8rem;
-    }
-  }
-  .preview-img {
-    margin-top: 0;
-    margin-bottom: 2.5rem;
-    @include align-center;
-  }
+.post img {
+  margin-top: .5rem;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+  height: auto;
+  // filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.08));
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .post-tail-wrapper {
-  margin-top: 6rem;
+  margin-top: 5rem;
   border-bottom: 1px double var(--main-border-color);
   font-size: 0.85rem;
 }
 
-.post-tags {
-  line-height: 2rem;
-}
-
 .post-navigation {
   padding-top: 3rem;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 
   .btn {
     @include btn-post-nav;
@@ -111,20 +75,20 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   p {
     font-size: 1.1rem;
     line-height: 1.5rem;
-    margin-top: 0.3rem;
+    margin-top: .3rem;
     white-space: normal;
   }
 
   a, span {
     &::before {
       color: var(--text-muted-color);
-      font-size: 0.65rem;
+      font-size: .65rem;
       text-transform: uppercase;
     }
     &:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      left: 0.5px;
+      left: .5px;
       &::before {
         content: $prompt-older
       }
@@ -132,7 +96,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
     &:last-child {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      right: 0.5px;
+      right: .5px;
       &::before {
         content: $prompt-newer
       }
@@ -159,19 +123,21 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   position: sticky;
   top: 4rem;
   transition: top 0.2s ease-in-out;
-  animation: fade-up 0.8s;
+  animation: fade-up .8s;
   &.topbar-down {
     top: 6rem;
   }
-  > span {
-    @include panel-label;
+  >h3 {
+    font-size: 1rem;
+    font-family: 'Oswald', sans-serif;
+    color: gray;
   }
 }
 
 #toc li>a {
   line-height: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
 }
 
 
@@ -179,22 +145,24 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
 
 #related-posts {
   >h3 {
-    @include label(1.1rem, 600);
+    color: gray;
+    font-size: 1.1rem;
+    font-family: 'Oswald', sans-serif;
   }
   .card {
     border: 1px solid var(--card-border-color);
     background-color: var(--card-bg);
     box-shadow: 0 0 5px 0 var(--card-box-shadow);
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
     h3 {
-      color: var(--text-color);
+      color: var(--label-relate-post);
     }
     &:hover {
       -webkit-transform: translate3d(0, -3px, 0);
       transform: translate3d(0, -3px, 0);
-      box-shadow: 0 20px 35px -4px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.08));
     }
   }
 
@@ -203,8 +171,8 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   }
 
   p {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    font-size: .9rem;
+    margin-bottom: .5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -235,9 +203,6 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
 
 #post-extend-wrapper {
   min-height: 2rem;
-  #disqus_thread {
-    margin-bottom: 2rem;
-  }
 }
 
 .post-tail-bottom a {
@@ -255,7 +220,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
     font-size: 1.2rem;
     a {
       &:not(:last-child) {
-        margin-right: 0.25rem;
+        margin-right: .25rem;
       }
       &:hover {
         text-decoration: none;
@@ -265,7 +230,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
       }
     }
     >i {
-      padding-top: 0.35rem;
+      padding-top: .35rem;
       &:hover {
         @extend %btn-share-hovor;
       }
@@ -295,7 +260,7 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
 
 
 .share-label {
-  @include label(inherit, 400, inherit);
+  font-family: 'Oswald', sans-serif;
   &::after {
     content: ":";
   }
@@ -303,28 +268,24 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
 
 .license-wrapper {
   line-height: 1.2rem;
-  >a {
+  .license-text>a {
     font-weight: 600;
-    &:hover {
-      @extend %link-hover;
-    }
   }
   i {
     font-weight: 400;
   }
   span:last-child {
-    font-size: 0.85rem;
+    font-size: .85rem;
   }
 } // .license-wrapper
 
 
 @media all and (max-width: 576px) {
   .post-tail-bottom {
-    -ms-flex-wrap: wrap-reverse!important;
-    flex-wrap: wrap-reverse!important;
+    -ms-flex-wrap: wrap!important;
+    flex-wrap: wrap!important;
     >div:first-child {
-      width: 100%;
-      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
   }
 }
@@ -339,7 +300,11 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
   .post {
     .post-meta {
       >div:not(:first-child)::before {
-        @include dot(0.5rem, 0.2rem);
+        content: "\2022";
+        color: rgba(158, 158, 158, 0.8);
+        font-weight: bold;
+        padding-left: .5rem;
+        padding-right: .3rem;
       }
       &.flex-column {
         -webkit-box-orient: horizontal!important;
@@ -359,10 +324,47 @@ $prompt-newer: "{{ site.data.label.post.button.next }}";
 
 /* Hide SideBar and TOC */
 @media all and (max-width: 830px) {
+  .post img {
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
   .post-navigation {
     padding-left: 0;
     padding-right: 0;
     margin-left: -.5rem;
     margin-right: -.5rem;
+  }
+
+}
+
+/*
+  The following resposive design aim to
+  make #post-extend-wrapper margin-right same as pannel's width
+*/
+@media all and (min-width: 1200px) {
+  #post-extend-wrapper {
+    margin-right: 25%;
+  }
+}
+
+@media all and (min-width: 1460px) {
+  #post-extend-wrapper {
+    margin-right: 300px;
+  }
+}
+
+@media all and (min-width: 1650px) {
+  #post-extend-wrapper {
+    margin-right: calc((100% - 1150px) / 10 + 300px);
+  }
+}
+
+@media all and (min-width: 1700px) {
+  #post-extend-wrapper {
+    margin-right: calc((100% - 1150px) / 8 + 300px);
   }
 }

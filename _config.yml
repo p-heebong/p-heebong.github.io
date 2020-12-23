@@ -6,18 +6,19 @@
 
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
-# --------------------------
+#--------------------------
+
 title: 희봉이의 개발새발                          # the main title
 
 tagline: 개발새발 쓰여진, 하지만 빠져드는 개발/게임 블로그  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   마이크로 서비스, 라이브 스트리밍에 관심이 있습니다.
-  핵앤슬래시 RPG 장르를 좋아합니다.
-  학부생 시절 팀 유니브데빌즈 co-founder로 참여해 대학생 아웃소싱 플랫폼 '유니드림'의 웹 풀스택 개발을 담당하였습니다.
+  핵앤슬래시 RPG 장르를 즐겨 합니다.
+  학부생 시절 팀 유니브데빌즈 co-founder로 참여해 대학생 아웃소싱 플랫폼 서비스 '유니드림'의 풀스택 개발을 담당하였습니다.
 
-# fill in the base hostname & protocol for your site, e.g., 'https://username.github.io'
-url: 'https://p-heebong.github.io'
+# Replace with your domain, e.g. 'https://username.github.io'
+url: 'https://p-heebong.github.io' #'protocol://domain'
 
 author: 희봉이                  # change to your full name
 
@@ -39,55 +40,56 @@ social:
     # - https://www.linkedin.com/in/username
 
 google_site_verification: google_meta_tag_verification # change to your verification string
-# --------------------------
 
+#--------------------------
 
-# Only if your site type is GitHub Project sites and doesn't have a custom domain,
-# change below value to '/projectname'.
+# if your site type is Project Pages site, change below value to '/projectname'
 baseurl: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Asia/Seoul
 
 google_analytics:
-  id: ''          # Fill with your Google Analytics ID
-  pv:
-    # The Google Analytics pageviews switch.
-    # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
-    enabled: false
-    # the next options only valid when `google_analytics.pv` is enabled.
-    proxy_url: ''
-    proxy_endpoint: ''
-    cache: false  # pv data local cache, good for the users from GFW area.
+  # Fill with your Google Analytics ID
+  id: ''
+  # The Google Analytics pageviews switch.
+  # DO NOT enable it unless you know how to deploy the Google Analytics superProxy.
+  pv: false
+  # superProxy baseURL and URL, only valid when `google_analytics.pv` is set to 'true'
+  proxy_baseurl: ''
+  proxy_url: ''
+
 
 disqus:
   comments: true  # boolean type, the global switch for posts comments.
   shortname: 'p-heebong-github-io'    # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 
-# Prefer color scheme setting.
+# Prefer color scheme setting, available values:
 #
-# Note: Keep empty will follow the system prefer color by default,
-# and there will be a toggle to switch the theme between dark and light
-# on the bottom left of the sidebar.
-#
-# Available options:
+#     dual   - Follow the system prefer color by default, and a toggle will display
+#              in the left bottom of Sidebar, which used for switch the theme between dark and light.
 #
 #     light  - Use the light color scheme
 #
 #     dark   - Use the dark color scheme
 #
-theme_mode:   # <light|dark>
+theme_mode: light
 
-# boolean type, the global switch for ToC in posts.
+# boolean type, global switch for ToC in posts.
 toc: true
 
 paginate: 10
 
+markdown: kramdown
+
+highlighter: rouge
+
 kramdown:
+  input: GFM
   syntax_highlighter: rouge
-  syntax_highlighter_opts:   # Rouge Options › https://github.com/jneen/rouge#full-options
-    css_class: highlight
+  syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
+    css_class: 'highlight'
     # default_lang: console
     span:
       line_numbers: false
@@ -95,25 +97,18 @@ kramdown:
       line_numbers: true
       start_line: 1
 
-# DO NOT change this unless you're a Pro user on Jekyll and Web development,
-# or you think you're smart enough to change other relevant URLs within this template.
 permalink: /posts/:title/
-
-collections:
-  tabs:
-    output: true
-    sort_by: order
-
 
 defaults:
   -
     scope:
-      path: ''          # An empty string here means all files in the project
+      path: ""          # An empty string here means all files in the project
       type: posts
     values:
       layout: post
       comments: true    # Enable comments in posts.
       toc: true         # Display TOC column in posts.
+      location: Post
       breadcrumb:
         -
           label: Posts
@@ -125,15 +120,10 @@ defaults:
       comments: false
   -
     scope:
-      path: index.html
-    values:
-      breadcrumb:
-        -
-          label: Posts
-  -
-    scope:
       path: tags
     values:
+      tab_active: Tags
+      location: Tag
       breadcrumb:
         -
           label: Home
@@ -145,6 +135,8 @@ defaults:
     scope:
       path: categories
     values:
+      tab_active: Categories
+      location: Category
       breadcrumb:
         -
           label: Home
@@ -154,8 +146,7 @@ defaults:
           url: /tabs/categories/
   -
     scope:
-      path: ''
-      type: tabs             # see `site.collections`
+      path: tabs
     values:
       layout: page
       dynamic_title: true    # Hide title in mobile screens.
@@ -163,6 +154,12 @@ defaults:
         -
           label: Home
           url: /
+  -
+    scope:
+      path: assets/data
+    values:
+      layout: compress
+
 
 sass:
   sass_dir: /assets/css
@@ -170,27 +167,43 @@ sass:
 
 compress_html:
   clippings: all
-  comments: all
-  endings: all
+  comments: ["<!-- ", " -->"]
+  endings: [html, head, body, dt, dd, rt, rp,
+            optgroup, option, colgroup, caption,
+            thead, tbody, tfoot, tr, td, th]
   profile: false
   blanklines: false
   ignore:
     envs: []
 
 exclude:
-  - vendor
+  - vendor        # Avoid Jekyll mistakenly read the vender directory on Travis-CI's VM .
   - Gemfile.lock
   - Gemfile
   - tools
   - docs
-  - README.md
-  - LICENSE
 
-jekyll-archives:
-  enabled: [categories, tags]
-  layouts:
-    category: category
-    tag: tag
-  permalinks:
-    tag: /tags/:name/
-    category: /categories/:name/
+sitemap_exclude:  # Sitemap will exclude the following items.
+  fuzzy:
+    - /assets/
+  accurate:
+    - /norobots/
+    - /tabs/
+    - /categories/
+    - /tags/
+    - /posts/
+    - 404.html
+    - feed.xml
+    - sitemap.xml
+    - robots.txt
+    - redirects.json
+
+
+# 추가한 내용 
+plugins: # add some pluginss
+  - jemoji
+
+
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false

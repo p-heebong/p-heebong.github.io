@@ -7,7 +7,8 @@
   MIT License
 -->
 
-<i class="mode-toggle fas fa-adjust"></i>
+<i class="mode-toggle fas fa-sun" light-mode-invisible></i>
+<i class="mode-toggle fas fa-moon" dark-mode-invisible></i>
 
 <script type="text/javascript">
 
@@ -17,13 +18,13 @@
     static get LIGHT_MODE() { return "light"; }
 
     constructor() {
-      if (this.hasMode) {
-        if (this.isDarkMode) {
-          if (!this.isSysDarkPrefer) {
+      if (this.mode != null) {
+        if (this.mode == ModeToggle.DARK_MODE) {
+          if (!this.isDarkPrefer) {
             this.setDark();
           }
         } else {
-          if (this.isSysDarkPrefer) {
+          if (this.isDarkPrefer) {
             this.setLight();
           }
         }
@@ -33,22 +34,21 @@
 
       /* always follow the system prefers */
       this.sysDarkPrefers.addListener(function() {
-        if (self.hasMode) {
-          if (self.isDarkMode) {
-            if (!self.isSysDarkPrefer) {
+
+        if (self.mode != null) {
+          if (self.mode == ModeToggle.DARK_MODE) {
+            if (!self.isDarkPrefer) {
               self.setDark();
             }
 
           } else {
-            if (self.isSysDarkPrefer) {
+            if (self.isDarkPrefer) {
               self.setLight();
             }
           }
 
           self.clearMode();
         }
-
-        self.updateMermaid();
       });
 
     } /* constructor() */
@@ -69,82 +69,34 @@
       sessionStorage.removeItem(ModeToggle.MODE_KEY);
     }
 
-    get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); }
-
-    get isSysDarkPrefer() { return this.sysDarkPrefers.matches; }
-
-    get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; }
-
-    get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; }
-
-    get hasMode() { return this.mode != null; }
-
-    get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); }
-
-    /* get the current mode on screen */
-    get modeStatus() {
-      if (this.isDarkMode
-        || (!this.hasMode && this.isSysDarkPrefer) ) {
-        return ModeToggle.DARK_MODE;
-      } else {
-        return ModeToggle.LIGHT_MODE;
-      }
+    get sysDarkPrefers() {
+      return window.matchMedia("(prefers-color-scheme: dark)");
     }
 
-    updateMermaid() {
-      if (typeof mermaid !== "undefined") {
-        let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default");
-        let config = { theme: expectedTheme };
+    get isDarkPrefer() {
+      return this.sysDarkPrefers.matches;
+    }
 
-        /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */
-        $(".mermaid").each(function() {
-          let svgCode = $(this).prev().children().html();
-          $(this).removeAttr("data-processed");
-          $(this).html(svgCode);
-        });
-
-        mermaid.initialize(config);
-        mermaid.init(undefined, ".mermaid");
-      }
+    get mode() {
+      return sessionStorage.getItem(ModeToggle.MODE_KEY);
     }
 
     flipMode() {
-      if (this.hasMode) {
-        if (this.isSysDarkPrefer) {
-          if (this.isLightMode) {
-            this.clearMode();
-          } else {
-            this.setLight();
-          }
+      if ((this.mode == null && this.isDarkPrefer) ||
+          this.mode == ModeToggle.DARK_MODE) {
+        this.setLight();
 
-        } else {
-          if (this.isDarkMode) {
-            this.clearMode();
-          } else {
-            this.setDark();
-          }
-        }
-
-      } else {
-        if (this.isSysDarkPrefer) {
-          this.setLight();
-        } else {
-          this.setDark();
-        }
+      } else { /* light mode or default-light */
+        this.setDark();
       }
-
-      this.updateMermaid();
-
-    } /* flipMode() */
+    }
 
   } /* ModeToggle */
 
   let toggle = new ModeToggle();
 
   $(".mode-toggle").click(function() {
-
     toggle.flipMode();
-
   });
 
 </script>

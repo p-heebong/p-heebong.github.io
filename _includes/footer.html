@@ -12,9 +12,9 @@
       <p class="mb-0">
         © {{ 'now' | date: "%Y" }}
         <a href="{{ site.social.links[0] }}">{{ site.social.name }}</a>.
-        {% if site.data.rights.brief %}
+        {% if site.data.right.brief %}
         <span data-toggle="tooltip" data-placement="top"
-          title="{{ site.data.rights.verbose }}">{{ site.data.rights.brief }}</span>
+          title="{{ site.data.right.verbose }}">{{ site.data.right.brief }}</span>
         {% endif %}
       </p>
     </div>
@@ -22,10 +22,9 @@
     <div class="footer-right">
       <p class="mb-0">
         Powered by
-        <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>
-        with
-        <a href="{{ site.data.meta.homepage }}" target="_blank" rel="noopener">{{ site.data.meta.name }}</a>
-        theme.
+        <a href="https://jekyllrb.com" target="_blank">Jekyll</a>
+        with theme
+        <a href="https://github.com/cotes2020/jekyll-theme-chirpy/">Chirpy</a>.
       </p>
     </div>
 

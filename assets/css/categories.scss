@@ -1,13 +1,12 @@
 ---
-# Style for Tab Categories
-# v2.0
-# https://github.com/cotes2020/jekyll-theme-chirpy
-# © 2019 Cotes Chung
-# MIT License
 ---
-
-
-{% include_relative _addon/main.scss %}
+/*!
+  Style for Tab Categories
+  v2.0
+  https://github.com/cotes2020/jekyll-theme-chirpy
+  © 2019 Cotes Chung
+  MIT License
+*/
 
 %category-icon-color {
   color: gray;
@@ -22,7 +21,7 @@
     border-left: none;
     border-right: none;
     padding-left: 2rem;
-    > i {
+    >i {
       @extend %category-icon-color;
     }
     &:first-child {
@@ -32,7 +31,7 @@
 
   }
 
-  .card-header > span > i:first-child {
+  .card-header>span>i:first-child {
     @extend %category-icon-color;
   }
 
@@ -50,9 +49,9 @@
   border-radius: 50%;
   text-align: center;
   color: #6c757d!important;
-  > i.fas {
+  >i.fas {
     position: relative;
-    height: 0.7rem;
+    height: .7rem;
     width: 1rem;
     transition: 300ms ease all;
   }
